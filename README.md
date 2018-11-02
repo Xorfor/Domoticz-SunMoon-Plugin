@@ -1,12 +1,7 @@
 # Domoticz-Sun-Plugin
 
 ## Prerequisites
-Install pysolar
-```
-sudo pip3 install pysolar
-sudo pip3 install pytz
-```
-
+Install ephem in a directory used by the Domoticz Python plugins, eg:
 ```
 sudo pip3 install ephem -t /usr/lib/python3.5
 ```
