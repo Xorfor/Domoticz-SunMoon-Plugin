@@ -1,4 +1,4 @@
-# Domoticz-Sun-Plugin
+# Sun
 
 ## Prerequisites
 Install [ephem](https://rhodesmill.org/pyephem/index.html) in a directory used by the Domoticz Python plugins, eg:
