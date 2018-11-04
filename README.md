@@ -1,4 +1,4 @@
-# Sun
+# SunMoon
 
 ## Prerequisites
 Install [ephem](https://rhodesmill.org/pyephem/index.html) in a directory used by the Domoticz Python plugins, eg:
@@ -7,6 +7,8 @@ sudo pip3 install ephem -t /usr/lib/python3.5
 ```
 ## Parameters
 None
+
+Default location specified in Domoticz is used.
 
 ## Devices
 The following parameters are displayed:
@@ -20,3 +22,5 @@ The following parameters are displayed:
 | **Moon Altitude** | The angle between the moon and the horizon
 | **Moon Distance** | Distance to the moon in km
 | **Moon Phase**    | Moon phase in %
+
+![devices](https://github.com/Xorfor/Domoticz-SunMoon-Plugin/blob/master/images/devices.jpg)
