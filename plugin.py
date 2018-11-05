@@ -16,7 +16,11 @@
 import Domoticz
 import datetime
 import math
-import ephem
+import sys
+try:
+    import ephem
+except:
+    pass
 
 
 class BasePlugin:
@@ -49,6 +53,10 @@ class BasePlugin:
 
     def __init__(self):
         self.__runAgain = 0
+        if "ephem" in sys.modules:
+            self.__ephem_exist = True
+        else:
+            self.__ephem_exist = False
 
     def onCommand(self, Unit, Command, Level, Color):
         Domoticz.Debug(
@@ -68,6 +76,10 @@ class BasePlugin:
 
     def onStart(self):
         Domoticz.Debug("onStart called")
+        if not self.__ephem_exist:
+            Domoticz.Error("Ephem not available")
+            return False
+
         if Parameters["Mode6"] == "Debug":
             Domoticz.Debugging(self.__DEBUG_ALL)
         else:
@@ -118,13 +130,17 @@ class BasePlugin:
         self.__runAgain -= 1
         if self.__runAgain <= 0:
             self.__runAgain = self.__HEARTBEATS2MIN * self.__MINUTES
+            if not self.__ephem_exist:
+                Domoticz.Error("Ephem not available")
+                return False
             self.__observer.date = datetime.datetime.utcnow()
             Domoticz.Debug("DT: {}".format(self.__observer.date))
             # Sun data
             self.__sun.compute(self.__observer)
             alt = round(math.degrees(self.__sun.alt), 2)
             az = round(math.degrees(self.__sun.az), 2)
-            dist = round(self.__sun.earth_distance * ephem.meters_per_au / 1000)
+            dist = round(self.__sun.earth_distance *
+                         ephem.meters_per_au / 1000)
             Domoticz.Debug("Sun data: {} / {}".format(alt, az))
             UpdateDevice(self.__UNIT_SUN_ALT, int(alt), str(alt))
             UpdateDevice(self.__UNIT_SUN_AZ, int(az), str(az))
@@ -133,7 +149,8 @@ class BasePlugin:
             self.__moon.compute(self.__observer)
             alt = round(math.degrees(self.__moon.alt), 2)
             az = round(math.degrees(self.__moon.az), 2)
-            dist = round(self.__moon.earth_distance * ephem.meters_per_au / 1000)
+            dist = round(self.__moon.earth_distance *
+                         ephem.meters_per_au / 1000)
             Domoticz.Debug("Phase: {}".format(self.__moon.moon_phase))
             phase = round(self.__moon.moon_phase * 100, 1)
             UpdateDevice(self.__UNIT_MOON_ALT, int(alt), str(alt))
@@ -241,26 +258,22 @@ def DumpDevicesToLog():
     for x in Devices:
         Domoticz.Debug("Device...............: {} - {}".format(x, Devices[x]))
         Domoticz.Debug("Device Idx...........: {}".format(Devices[x].ID))
-        Domoticz.Debug(
-            "Device Type..........: {} / {}".format(Devices[x].Type, Devices[x].SubType))
+        Domoticz.Debug("Device Type..........: {} / {}".format(Devices[x].Type, Devices[x].SubType))
         Domoticz.Debug("Device Name..........: '{}'".format(Devices[x].Name))
         Domoticz.Debug("Device nValue........: {}".format(Devices[x].nValue))
         Domoticz.Debug("Device sValue........: '{}'".format(Devices[x].sValue))
-        Domoticz.Debug(
-            "Device Options.......: '{}'".format(Devices[x].Options))
+        Domoticz.Debug("Device Options.......: '{}'".format(Devices[x].Options))
         Domoticz.Debug("Device Used..........: {}".format(Devices[x].Used))
-        Domoticz.Debug(
-            "Device ID............: '{}'".format(Devices[x].DeviceID))
-        Domoticz.Debug("Device LastLevel.....: {}".format(
-            Devices[x].LastLevel))
+        Domoticz.Debug("Device ID............: '{}'".format(Devices[x].DeviceID))
+        Domoticz.Debug("Device LastLevel.....: {}".format(Devices[x].LastLevel))
         Domoticz.Debug("Device Image.........: {}".format(Devices[x].Image))
 
 
 def DumpImagesToLog():
     # Show images
-    Domoticz.Debug("Image count..........: " + str(len(Images)))
+    Domoticz.Debug("Image count..........: {}".format((len(Images))))
     for x in Images:
-        Domoticz.Debug("Image '" + x + "...': '" + str(Images[x]) + "'")
+        Domoticz.Debug("Image '{}'...: '{}'".format(x, Images[x]))
 
 
 def DumpParametersToLog():
@@ -313,8 +326,7 @@ def UpdateDeviceOptions(Unit, Options={}):
         if Devices[Unit].Options != Options:
             Devices[Unit].Update(nValue=Devices[Unit].nValue,
                                  sValue=Devices[Unit].sValue, Options=Options)
-            Domoticz.Debug("Device Options update: " +
-                           Devices[Unit].Name + " = " + str(Options))
+            Domoticz.Debug("Device Options update: {} = {}".format(Devices[Unit].Name, Options))
 
 
 def UpdateDeviceImage(Unit, Image):
@@ -322,5 +334,4 @@ def UpdateDeviceImage(Unit, Image):
         if Devices[Unit].Image != Images[Image].ID:
             Devices[Unit].Update(nValue=Devices[Unit].nValue,
                                  sValue=Devices[Unit].sValue, Image=Images[Image].ID)
-            Domoticz.Debug("Device Image update: " +
-                           Devices[Unit].Name + " = " + str(Images[Image].ID))
+            Domoticz.Debug("Device Image update: {} = {}".format(Devices[Unit].Name, Images[Image].ID))
