@@ -135,7 +135,7 @@ class BasePlugin:
             az = round(math.degrees(self.__moon.az), 2)
             dist = round(self.__moon.earth_distance * ephem.meters_per_au / 1000)
             Domoticz.Debug("Phase: {}".format(self.__moon.moon_phase))
-            phase = round(self.__moon.moon_phase * 100)
+            phase = round(self.__moon.moon_phase * 100, 1)
             UpdateDevice(self.__UNIT_MOON_ALT, int(alt), str(alt))
             UpdateDevice(self.__UNIT_MOON_AZ, int(az), str(az))
             UpdateDevice(self.__UNIT_MOON_DIST, int(dist), str(dist))
