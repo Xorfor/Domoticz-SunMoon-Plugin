@@ -44,7 +44,16 @@ The following devices are displayed:
 
 (*) The devices **Moon phase** and **Moon illumination** also display the moonphase with an icon. The following icons will be displayed:
 
-| ![New moon](https://github.com/Xorfor/Domoticz-SunMoon-Plugin/blob/master/images/xfr_sunmoon_phase148_On.png) |
+| Icon | Description |
+| :--- | :---        |
+| ![New moon](https://github.com/Xorfor/Domoticz-SunMoon-Plugin/blob/master/images/xfr_sunmoon_phase048_On.png) | New moon |
+| ![Waxing crescent](https://github.com/Xorfor/Domoticz-SunMoon-Plugin/blob/master/images/xfr_sunmoon_phase148_On.png) | Waxing crescent |
+| ![First quarter](https://github.com/Xorfor/Domoticz-SunMoon-Plugin/blob/master/images/xfr_sunmoon_phase248_On.png) | First quarter |
+| ![Waxing gibbous](https://github.com/Xorfor/Domoticz-SunMoon-Plugin/blob/master/images/xfr_sunmoon_phase348_On.png) | Waxing gibbous |
+| ![Full moon](https://github.com/Xorfor/Domoticz-SunMoon-Plugin/blob/master/images/xfr_sunmoon_phase448_On.png) | Full moon |
+| ![Waning gibbous](https://github.com/Xorfor/Domoticz-SunMoon-Plugin/blob/master/images/xfr_sunmoon_phase548_On.png) | Waning gibbous |
+| ![Last quarter](https://github.com/Xorfor/Domoticz-SunMoon-Plugin/blob/master/images/xfr_sunmoon_phase648_On.png) | Last quarter |
+| ![Waning crescent](https://github.com/Xorfor/Domoticz-SunMoon-Plugin/blob/master/images/xfr_sunmoon_phase748_On.png) | Waning crescent |
 
 
 ![devices](https://github.com/Xorfor/Domoticz-SunMoon-Plugin/blob/master/images/devices.jpg)
