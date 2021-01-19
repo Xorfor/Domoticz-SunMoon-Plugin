@@ -21,8 +21,7 @@ Next step is to install the Domoticz plugin. This plugin will automatically crea
     sudo service domoticz.sh restart
     ```
 1. Make sure that "Accept new Hardware Devices" is enabled in Domoticz settings
-1. Go to "Hardware" page and add new hardware with Type "PWS"
-1. Enter the Port number as used in WS View
+1. Go to "Hardware" page and add new hardware with Type "SunMoon"
 1. Press Add
 
 ### Update
