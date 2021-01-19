@@ -35,7 +35,7 @@ The following devices are displayed:
 | **Moon azimuth**          | The horizontal direction of the moon in the sky
 | **Moon altitude**         | The angle between the moon and the horizon
 | **Moon distance**         | Distance to the moon in km
-| **Moon phase** (*)        | Name of moonphase  **New moon**, **Waxing crescent**, **First quarter**, **Waxing gibbous**, **Full moon**, **Waning gibbous**, **Last quarter**, or **Waning crescent**
+| **Moon phase** (*)        | Name of moonphase  :new_moon:, :waxing_crescent_moon:, :first_quarter_moon:, :waxing_gibbous_moon:, :full_moon:, :waning_gibbous_moon:, :last_quarter_moon:, or :waning_crescent_moon:
 | **Next new moon**         | Date time of the next new moon
 | **Next first quarter**    | Date time of the next first quarter
 | **Next full moon**        | Date time of the next full moon
