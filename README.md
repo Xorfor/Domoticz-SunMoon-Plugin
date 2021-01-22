@@ -84,5 +84,6 @@ The following devices are displayed:
 | ![Last quarter](https://github.com/Xorfor/Domoticz-SunMoon-Plugin/blob/master/images/xfr_sunmoon_phase648_On.png) | Last quarter |
 | ![Waning crescent](https://github.com/Xorfor/Domoticz-SunMoon-Plugin/blob/master/images/xfr_sunmoon_phase748_On.png) | Waning crescent |
 
+An overview of all the devices:
 
 ![devices](https://github.com/Xorfor/Domoticz-SunMoon-Plugin/blob/master/images/devices.jpg)

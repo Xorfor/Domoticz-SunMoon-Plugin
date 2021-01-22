@@ -416,7 +416,7 @@ class BasePlugin:
             # -------------------------------------------------------------------------------
             # Sun rise & set today
             # -------------------------------------------------------------------------------
-            self.__observer.date = utc_now.date()
+            self.__observer.date = target_date
             self.__sun.compute(self.__observer)
             i = 0
             for t in self.__TWILIGHTS:
