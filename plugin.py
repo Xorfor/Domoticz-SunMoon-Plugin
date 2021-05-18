@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 """
-<plugin key="xfr_sunmoon" name="SunMoon" author="Xorfor" version="1.0.0">
+<plugin key="xfr_sunmoon" name="SunMoon" author="Xorfor" version="1.1.0">
     <params>
         <param field="Mode6" label="Debug" width="75px">
             <options>
@@ -422,28 +422,42 @@ class BasePlugin:
             for t in self.__TWILIGHTS:
                 # Zero the horizon
                 self.__observer.horizon = t[0]
-                next_rising = (
-                    ephem.localtime(
-                        self.__observer.next_rising(self.__sun, use_center=t[1])
+                try:
+                    next_rising = (
+                        ephem.localtime(
+                            self.__observer.next_rising(self.__sun, use_center=t[1])
+                        )
+                        + self.__SEC30
                     )
-                    + self.__SEC30
-                )
-                UpdateDevice(
-                    unit.SUN_RISE + i,
-                    0,
-                    "{}".format(next_rising.strftime(self.__DT_FORMAT)),
-                )
-                next_setting = (
-                    ephem.localtime(
-                        self.__observer.next_setting(self.__sun, use_center=t[1])
+                    UpdateDevice(
+                        unit.SUN_RISE + i,
+                        0,
+                        "{}".format(next_rising.strftime(self.__DT_FORMAT)),
                     )
-                    + self.__SEC30
-                )
-                UpdateDevice(
-                    unit.SUN_SET + i,
-                    0,
-                    "{}".format(next_setting.strftime(self.__DT_FORMAT)),
-                )
+                except:
+                    UpdateDevice(
+                        unit.SUN_RISE + i,
+                        0,
+                        "{}".format("No time available"),
+                    )
+                try:
+                    next_setting = (
+                        ephem.localtime(
+                            self.__observer.next_setting(self.__sun, use_center=t[1])
+                        )
+                        + self.__SEC30
+                    )
+                    UpdateDevice(
+                        unit.SUN_SET + i,
+                        0,
+                        "{}".format(next_setting.strftime(self.__DT_FORMAT)),
+                    )
+                except:
+                    UpdateDevice(
+                        unit.SUN_RISE + i,
+                        0,
+                        "{}".format("No time available"),
+                    )
                 if i == 0:
                     value = (next_setting - next_rising).total_seconds()
                     hh = divmod(value, 3600)
@@ -457,7 +471,7 @@ class BasePlugin:
                     UpdateDevice(
                         unit.DAY_LENGTH_T,
                         0,
-                        "{:02}:{:02}".format(int(hh[0]),int(mm[0])),
+                        "{:02}:{:02}".format(int(hh[0]), int(mm[0])),
                     )
 
                 i += 1
